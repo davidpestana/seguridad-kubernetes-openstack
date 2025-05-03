@@ -1,0 +1,44 @@
+# Archivos de Vagrant
+.vagrant/
+*.box
+
+# Archivos de VirtualBox
+*.vdi
+*.vbox
+*.vbox-prev
+*.log
+
+# DevStack
+devstack/.stackenv
+devstack/local.conf
+devstack/accrc.*
+devstack/.localrc.auto
+devstack/logs/
+devstack/*.pid
+devstack/*.log
+devstack/data/
+devstack/status
+
+# Docker/Kubernetes (Kind)
+*.tar
+*.img
+kind-config.yaml
+
+# Archivos temporales del sistema
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Python (si se usa pip o scripts)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+.venv/
+.egg-info/
+
+# VS Code
+.vscode/
