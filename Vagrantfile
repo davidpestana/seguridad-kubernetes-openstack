@@ -64,6 +64,8 @@ Vagrant.configure("2") do |config|
   config.vm.define "k8s" do |k8s|
     k8s.vm.hostname = "k8s"
     k8s.vm.network "private_network", type: "dhcp"
+    # Red pública NAT con reenvío de puerto 6443 para exponer la API de Kubernetes
+    k8s.vm.network "forwarded_port", guest: 6443, host: 6443, auto_correct: true
     k8s.vm.provider "virtualbox" do |vb|
       vb.name = "k8s"
       vb.memory = 4096
