@@ -69,7 +69,12 @@ roles_path = ./roles
 ```yaml
 # ~/labs/roles/devstack/tasks/main.yml
 
+- name: Detectar IP de red privada
+  set_fact:
+    devstack_host_ip: "{{ ansible_all_ipv4_addresses | select('match', '^192\\.168\\.56\\.') | list | first }}"
+
 - name: Instalar dependencias del sistema
+  become: true
   apt:
     name:
       - git
@@ -79,58 +84,46 @@ roles_path = ./roles
     state: present
     update_cache: yes
 
-- name: Crear usuario stack y configurar sudo sin contraseña
-  block:
-    - name: Crear usuario stack
-      command: useradd -m -s /bin/bash stack
-      args:
-        creates: /home/stack
-
-    - name: Configurar sudo sin contraseña para stack
-      copy:
-        dest: /etc/sudoers.d/stack
-        content: "stack ALL=(ALL) NOPASSWD:ALL\n"
-        mode: '0440'
-
-- name: Preparar entorno DevStack (como stack)
+- name: Clonar DevStack si no existe
+  git:
+    repo: https://opendev.org/openstack/devstack.git
+    dest: /home/vagrant/devstack
+    version: master
+    update: no
   become: true
-  become_user: stack
-  block:
-    - name: Eliminar DevStack previo si existe
-      file:
-        path: /home/stack/devstack
-        state: absent
+  become_user: vagrant
 
-    - name: Crear archivo stack.log vacío con permisos
-      file:
-        path: /home/stack/stack.log
-        state: touch
-        mode: '0644'
+- name: Asegurar que se elimina cualquier local.conf previo
+  file:
+    path: /home/vagrant/devstack/local.conf
+    state: absent
+  become: true
 
-    - name: Clonar DevStack si no existe
-      git:
-        repo: https://opendev.org/openstack/devstack.git
-        dest: /home/stack/devstack
-        version: master
-        update: no
+- name: Generar archivo local.conf desde plantilla
+  template:
+    src: local.conf.j2
+    dest: /home/vagrant/devstack/local.conf
+    mode: '0644'
+    force: true
+  become: true
+  become_user: vagrant
 
-    - name: Crear archivo local.conf con override del repositorio requirements
-      template:
-        src: local.conf.j2
-        dest: /home/stack/devstack/local.conf
-        mode: '0644'
+- name: Eliminar /opt/stack/requirements si existe (por si DevStack lo creó en ejecuciones previas)
+  file:
+    path: /opt/stack/requirements
+    state: absent
+  become: true
 
-    - name: Eliminar /opt/stack/requirements si existe (para forzar uso de fork)
-      file:
-        path: /opt/stack/requirements
-        state: absent
-      become: true
+- name: Ejecutar DevStack si no está desplegado
+  shell: ./stack.sh > /home/vagrant/stack.log 2>&1
+  args:
+    chdir: /home/vagrant/devstack
+  become: true
+  become_user: vagrant
+  environment:
+    HOME: /home/vagrant
+  when: not lookup('file', '/home/vagrant/devstack/.stack_success', errors='ignore')
 
-    - name: Ejecutar instalación DevStack (si no existe /opt/stack)
-      shell: ./stack.sh > /home/stack/stack.log 2>&1
-      args:
-        chdir: /home/stack/devstack
-      when: not (ansible_facts.env.HOME is defined and ansible_facts.env.HOME == "/opt/stack")
 ```
 
 6. **Crear plantilla local.conf.j2**
