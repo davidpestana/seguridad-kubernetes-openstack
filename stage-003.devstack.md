@@ -55,6 +55,11 @@ roles_path = ./roles
 - name: Desplegar DevStack
   hosts: openstack
   become: yes
+  pre_tasks:
+    - name: Detectar IP de red privada
+      set_fact:
+        devstack_host_ip: "{{ ansible_all_ipv4_addresses | select('match', '^192\\.168\\.56\\.') | list | first }}"
+
   roles:
     - devstack
 ```
@@ -110,22 +115,16 @@ roles_path = ./roles
         update: no
 
     - name: Crear archivo local.conf con override del repositorio requirements
-      copy:
+      template:
+        src: local.conf.j2
         dest: /home/stack/devstack/local.conf
-        content: |
-          [[local|localrc]]
-          ADMIN_PASSWORD=secret
-          DATABASE_PASSWORD=$ADMIN_PASSWORD
-          RABBIT_PASSWORD=$ADMIN_PASSWORD
-          SERVICE_PASSWORD=$ADMIN_PASSWORD
-          HOST_IP=192.168.56.14
-          REQUIREMENTS_REPO=https://github.com/davidpestana/requirements.git
         mode: '0644'
 
     - name: Eliminar /opt/stack/requirements si existe (para forzar uso de fork)
       file:
         path: /opt/stack/requirements
         state: absent
+      become: true
 
     - name: Ejecutar instalación DevStack (si no existe /opt/stack)
       shell: ./stack.sh > /home/stack/stack.log 2>&1
@@ -134,7 +133,20 @@ roles_path = ./roles
       when: not (ansible_facts.env.HOME is defined and ansible_facts.env.HOME == "/opt/stack")
 ```
 
-6. **Validar que Ansible puede ejecutar el playbook desde tower**
+6. **Crear plantilla local.conf.j2**
+
+```jinja2
+# ~/labs/roles/devstack/templates/local.conf.j2
+[[local|localrc]]
+ADMIN_PASSWORD=secret
+DATABASE_PASSWORD=$ADMIN_PASSWORD
+RABBIT_PASSWORD=$ADMIN_PASSWORD
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+HOST_IP={{ devstack_host_ip }}
+REQUIREMENTS_REPO=https://github.com/davidpestana/requirements.git
+```
+
+7. **Validar que Ansible puede ejecutar el playbook desde tower**
 
 ```bash
 cd ~/labs
