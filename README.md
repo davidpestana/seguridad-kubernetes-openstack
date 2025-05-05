@@ -116,3 +116,7 @@ Este laboratorio ha sido diseñado con fines **educativos** como parte del curso
 - [Entornos virtuales con Vagrant](https://vagrant-entornos-virtual-nx2257d.gamma.site/)
 - [Despliegue con OpenStack-Ansible (OSA)](https://openstack-ansible-osa-ucsw2x3.gamma.site/)
 - [Introducción a OpenStack](https://introduccion-a-openstack-dm9med7.gamma.site/)
+- 
+
+https://jsoneditoronline.org/#right=local.vozijo&left=cloud.66589e3492b5485d8a936aa679e7af10
+
