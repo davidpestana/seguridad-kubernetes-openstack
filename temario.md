@@ -18,9 +18,9 @@
 
 ### 🔐 Sesión 2: Seguridad de red y control de acceso en OpenStack
 
-* Neutron y segmentación de red
-* Floating IPs, routers y seguridad norte-sur
-* Introducción a Keystone y políticas IAM
+* [Neutron y segmentación de red](https://neutron-y-segmentacion-d-6zqf0i6.gamma.site/)
+* [Floating IPs, routers y seguridad norte-sur](https://floating-ips-routers-y-s-m7eeav7.gamma.site/)
+* [Introducción a Keystone y políticas IAM](https://keystone-y-politicas-iam-7ynm50h.gamma.site/)
 
 **Laboratorio:**
 
