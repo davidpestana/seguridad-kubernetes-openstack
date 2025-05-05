@@ -112,7 +112,7 @@ Este laboratorio ha sido diseñado con fines **educativos** como parte del curso
 ---
 
 
-https://ansible-automatizacion-p-qd0ievt.gamma.site/
-https://vagrant-entornos-virtual-nx2257d.gamma.site/
-https://openstack-ansible-osa-ucsw2x3.gamma.site/
-https://introduccion-a-openstack-dm9med7.gamma.site/
+- [Automatización con Ansible](https://ansible-automatizacion-p-qd0ievt.gamma.site/)
+- [Entornos virtuales con Vagrant](https://vagrant-entornos-virtual-nx2257d.gamma.site/)
+- [Despliegue con OpenStack-Ansible (OSA)](https://openstack-ansible-osa-ucsw2x3.gamma.site/)
+- [Introducción a OpenStack](https://introduccion-a-openstack-dm9med7.gamma.site/)
