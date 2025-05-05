@@ -110,3 +110,9 @@ vagrant ssh tower
 Este laboratorio ha sido diseñado con fines **educativos** como parte del curso especializado en **Ciberseguridad para entornos Cloud Híbridos**. Está optimizado para formación guiada, pero también puede adaptarse para autoaprendizaje.
 
 ---
+
+
+https://ansible-automatizacion-p-qd0ievt.gamma.site/
+https://vagrant-entornos-virtual-nx2257d.gamma.site/
+https://openstack-ansible-osa-ucsw2x3.gamma.site/
+https://introduccion-a-openstack-dm9med7.gamma.site/
