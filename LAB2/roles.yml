@@ -1,0 +1,67 @@
+# Estructura base de roles para Fase 10.bis
+
+# roles/generate_ssh_key/tasks/main.yml
+- name: Generar par de claves SSH si no existen
+  openssh_keypair:
+    path: "~/.ssh/id_rsa_cirros"
+    type: rsa
+    size: 2048
+    mode: '0600'
+  register: ssh_key
+  changed_when: ssh_key.changed
+
+- name: Leer clave pública
+  slurp:
+    src: "~/.ssh/id_rsa_cirros.pub"
+  register: pub_key_raw
+
+- name: Decodificar clave pública
+  set_fact:
+    keypair_public_key: "{{ pub_key_raw.content | b64decode }}"
+
+# roles/create_cirros_instance/tasks/main.yml
+- name: Comprobar si ya existe el keypair en OpenStack
+  command: openstack keypair show cirros-key
+  register: keypair_check
+  failed_when: false
+  changed_when: false
+
+- name: Registrar clave si no existe
+  openstack.cloud.keypair:
+    name: cirros-key
+    public_key: "{{ keypair_public_key }}"
+    state: present
+    cloud: devstack
+  when: keypair_check.rc != 0
+
+- name: Crear instancia CirrOS
+  openstack.cloud.server:
+    name: cirros-ansible
+    image: cirros
+    flavor: m1.tiny
+    key_name: cirros-key
+    network: red-interna
+    security_groups:
+      - web-only
+    auto_ip: yes
+    wait: yes
+  register: new_instance
+
+- name: Mostrar IP para añadir al inventario
+  debug:
+    msg: "Añade esta IP al inventario [cirros]: {{ new_instance.server.public_v4 or new_instance.server.interface_ip }}"
+
+# roles/configure_nc/tasks/main.yml
+- name: Instalar netcat si es necesario
+  raw: apk add busybox-extras || true
+
+- name: Iniciar servicio HTTP con nc
+  shell: "nohup nc -lk -p 80 -e /bin/echo &"
+
+# roles/validate_access/tasks/main.yml
+- name: Validar puerto 80 desde tower
+  delegate_to: localhost
+  wait_for:
+    host: "{{ ansible_host }}"
+    port: 80
+    timeout: 10

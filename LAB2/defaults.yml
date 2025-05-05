@@ -1,0 +1,22 @@
+# defaults/main.yml para cada rol
+
+# roles/generate_ssh_key/defaults/main.yml
+keypair_private_path: "~/.ssh/id_rsa_cirros"
+keypair_public_path: "~/.ssh/id_rsa_cirros.pub"
+keypair_name: "cirros-key"
+
+# roles/create_cirros_instance/defaults/main.yml
+instance_name: "cirros-ansible"
+image_name: "cirros"
+flavor_name: "m1.tiny"
+network_name: "red-interna"
+security_groups:
+  - web-only
+cloud_name: "devstack"
+
+# roles/configure_nc/defaults/main.yml
+nc_port: 80
+
+# roles/validate_access/defaults/main.yml
+validate_port: 80
+validate_timeout: 10

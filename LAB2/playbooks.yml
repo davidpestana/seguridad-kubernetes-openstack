@@ -1,0 +1,15 @@
+# playbooks/create-node.yml
+- name: Crear instancia CirrOS desde OpenStack
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - generate_ssh_key
+    - create_cirros_instance
+
+# playbooks/run-services.yml
+- name: Configurar servicio en instancia CirrOS y validarlo
+  hosts: cirros
+  gather_facts: false
+  roles:
+    - configure_nc
+    - validate_access
