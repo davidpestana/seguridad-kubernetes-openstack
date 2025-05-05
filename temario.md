@@ -28,6 +28,7 @@
 * Seguridad con Security Groups y reglas personalizadas
 * Asignación y uso de Floating IP
 
+** [Arquitecturas multi-site y federación](https://arquitecturas-multi-siti-gqfzx2g.gamma.site/)
 ---
 
 ### 🔐 Sesión 3: Seguridad en Kubernetes: RBAC, políticas y aislamiento
