@@ -47,9 +47,9 @@
 
 ### 🔍 Sesión 4: Observabilidad, trazabilidad y detección de amenazas
 
-* Fundamentos de logging y métricas en entornos seguros
-* Introducción a Falco, Prometheus, Grafana
-* Análisis forense básico y respuesta a incidentes
+* [Fundamentos de logging y métricas en entornos seguros](https://observabilidad-en-cibers-fwcoecp.gamma.site/)
+* [Introducción a Falco, Prometheus, Grafana](https://observabilidad-con-falco-5xvrkr7.gamma.site/)
+* [Análisis forense básico y respuesta a incidentes](https://analisis-forense-y-respu-3044mtz.gamma.site/)
 
 **Laboratorio:**
 
