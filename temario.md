@@ -33,9 +33,9 @@
 
 ### 🔐 Sesión 3: Seguridad en Kubernetes: RBAC, políticas y aislamiento
 
-* Principios de seguridad en Kubernetes: RBAC, API server, namespaces
-* Network Policies: control este-oeste
-* Gestión de secretos y buenas prácticas
+* [Principios de seguridad en Kubernetes: RBAC, API server, namespaces](https://seguridad-en-kubernetes--wmh589y.gamma.site/)
+* [Network Policies: control este-oeste](https://politicas-de-red-en-kube-jbmg3s5.gamma.site/)
+* [Gestión de secretos y buenas prácticas](https://gestion-segura-de-secret-qzz7i57.gamma.site/)
 
 **Laboratorio:**
 
