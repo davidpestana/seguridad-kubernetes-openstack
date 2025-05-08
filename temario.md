@@ -63,7 +63,7 @@
 
 * [OpenStack como IaaS para Kubernetes (nociones de interoperabilidad)](https://openstack-como-base-iaas-pea3vck.gamma.site/)
 * [Comparativa de gestión y seguridad](https://comparativa-entre-openst-xdi8z6w.gamma.site/)
-* [Validación de cumplimiento (checklist ENS)](https://gamma.app/docs/Guia-de-Cumplimiento-ENS-para-Infraestructuras-Cloud-6ywyigdssgenwmu?mode=doc)
+* [Validación de cumplimiento (checklist ENS)](https://guia-de-cumplimiento-ens-yopc054.gamma.site/)
 
 **Laboratorio Final:**
 
