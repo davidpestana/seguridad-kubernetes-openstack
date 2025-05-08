@@ -61,9 +61,9 @@
 
 ### 🔗 Sesión 5: Entorno híbrido y validación de prácticas seguras
 
-* OpenStack como IaaS para Kubernetes (nociones de interoperabilidad)
-* Comparativa de gestión y seguridad
-* Validación de cumplimiento (checklist ENS)
+* [OpenStack como IaaS para Kubernetes (nociones de interoperabilidad)](https://openstack-como-base-iaas-pea3vck.gamma.site/)
+* [Comparativa de gestión y seguridad](https://comparativa-entre-openst-xdi8z6w.gamma.site/)
+* [Validación de cumplimiento (checklist ENS)](https://gamma.app/docs/Guia-de-Cumplimiento-ENS-para-Infraestructuras-Cloud-6ywyigdssgenwmu?mode=doc)
 
 **Laboratorio Final:**
 
